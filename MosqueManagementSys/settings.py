@@ -85,11 +85,21 @@ WSGI_APPLICATION = 'MosqueManagementSys.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+   'default': {
+       'ENGINE': 'django.db.backends.postgresql',
+       'NAME': 'dfktfovle9tmb2',
+       'USER': 'pkbtgvuzpjxkny',
+       'PASSWORD': '6b626c3e76483402a1913e9ba1e312e89153256347de497ed4a55013701383f2',
+       'HOST': 'ec2-44-195-132-31.compute-1.amazonaws.com',
+       'PORT': '5432',
+   }
 }
 
 
