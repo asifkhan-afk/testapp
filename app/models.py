@@ -145,7 +145,7 @@ class Teacher(Cusmanager):
         address=models.CharField(max_length=60,blank=True, null=True)
         is_imam=models.BooleanField(default=False)
         is_teacher=models.BooleanField(default=False)
-        cnic=models.PositiveIntegerField(blank=True, null=True,max_length=15,validators=[validate_cnic])
+        cnic=models.PositiveIntegerField(blank=True, null=True,validators=[validate_cnic])
         salary=models.PositiveIntegerField(validators=[validate_money])
         phone=models.IntegerField(validators=[validate_phone],help_text="Enter phone number without zero")
         courses=models.ManyToManyField('Courses' ,blank=True)
