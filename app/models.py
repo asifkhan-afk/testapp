@@ -187,7 +187,7 @@ class Student(Cusmanager):
         address = models.CharField(max_length=50)
         educenter=models.ForeignKey(Educenter,on_delete=models.CASCADE)
         birthdate=models.DateField(help_text="add your birth date")
-        admission_date=models.DateField(auto_now_add=True)
+        admission_date=models.DateField(auto_now=True)
         courses=models.ManyToManyField("Courses")        
         grade=models.CharField(blank=True,null=True,max_length=30)
         adm_month = models.PositiveIntegerField(default=today.month, validators=[validate_date])
