@@ -1,1 +1,1 @@
-web gunicorn MosqueManagementSys.wsgi:application --logo-file -
+web gunicorn MosqueManagementSys.wsgi
