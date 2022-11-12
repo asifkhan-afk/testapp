@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">
+          Name: {{ student.name }}
+        </h5>
+        <h4>Father : {{student.f_name}}</h4>
+        <p class="card-text"> fee:  {{student.fee}}</p>
+        <p class="card-text"> Masjid:  {{student.educenter.name}}</p>
+
+        <p class="card-text"> Address:  {{student.address}}</p>
+
+        <p class="card-text"> Courses:   {% for i in courses %} "{{i.name}}", {% endfor %}</p>
+
+<p class="card-text"> Birth date:  {{student.birthdate}}</p>
+          <p class="card-text"> adm date:  {{student.admission_date}}</p>
+          <p class="card-text"> courses:  {{c.name}}</p>
+       {% if request.user.useradmin.studentter.id %}
+      <a  class="btn btn-info" href="{% url 'create_emp' request.user.useradmin.studentter.id %}" type="submit">Add Muqtadi</a>
+        {% endif %}
+      <a  class="btn btn-danger" href="{% url 'deleteimam' student.id %}" type="submit">Del</a>
+      <a  class="btn btn-danger" href="{% url 'updateimam' student.id %}" type="submit">Update</a>
+
+
+
+      <div id='show'></div>
+
+      </div>
+    </div>
+  </div>
+{% endblock content %}

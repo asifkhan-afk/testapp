@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+ {% block content %}
+<div class=" card-title p-1 rounded bg-white"><a class="btn btn-info "  href="{% url 'createuser'%}" class="btn btn-info"> + new</a></div>
+{% for educen in educenlist %}
+
+<div class="mainclass">
+ <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{ forloop.counter}}
+            . Admin Name: {{ educen.username }}
+          </h5>
+         <a href="{% url 'updateuser' educen.id %}" class="btn btn-info">Update</a>
+
+          <a href="{% url 'userdetail' educen.id %}" class="btn btn-success">detail</a>
+             <a href="{% url 'adminedu' educen.id %}" class="btn btn-primary">Masjid</a>
+
+
+        </div>
+      </div>
+    </div>
+    <div class="col-4"></div>
+    
+    </div>
+  </div>
+  <hr>
+ {% endfor %}
+
+
+ {% endblock %}

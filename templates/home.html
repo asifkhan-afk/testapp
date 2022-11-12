@@ -1,0 +1,219 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% if request.user.is_superuser %}
+<div class="row">
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Masajid List</h5>
+          <p class="card-text">click this to view details</p>
+          <a class="btn btn-success"  class="btn btn-info" href="{% url 'createuser'%}">add new</a>
+          
+          <a href="{% url 'educenlist'%}" class="btn btn-info">View</a>
+ 
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">admin List</h5>
+          <p class="card-text">Click to add view detail</p>
+          <a class="btn btn-success"   href="{% url 'createuser'%}" class="btn btn-info">add new</a>
+<!--Modal create user-->
+          <a href="{% url 'adminuserlist'%}" class="btn btn-info">View</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="card">
+       <div class='card-header'><h5 class="card-title">Muqtadi List</h5>  </div>
+        <div class="card-body">
+          <p class="card-text">click this to view details</p>
+          <a class="btn btn-success"  href="{% url 'admcreateemp' %}">add new</a>
+          <a href="{% url 'emplist'%}" class="btn btn-info">View</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Teacher list</h5>
+          <p class="card-text">Click to add view detail</p>
+
+          <a class="btn btn-success" href="{% url 'admcreateteacher'%}" class="btn btn-info">Add new</a>
+
+          <a href="{% url 'teacherlist'%}" class="btn btn-info">View</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Student list</h5>
+          <p class="card-text">click this to view details</p>
+
+          <a class="btn btn-success" href="{% url 'admcreatestu'%}" class="btn btn-info">add new</a>
+          <a href="{% url 'stulist'%}" class="btn btn-info">View</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Imam list</h5>
+          <p class="card-text">Click to add view detail</p>
+          <a class="btn btn-success"  href="{% url 'admcreateimam'%}" class="btn btn-info">add new</a>
+          <a href="{% url 'imamlist'%}" class="btn btn-info">View</a>
+
+        </div>
+      </div>
+    </div>
+  </div>
+<div class="row">
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Courses List</h5>
+          <p class="card-text">click this to view details</p>
+          <a class="btn btn-success" class="btn btn-success" href="{% url 'admcreatecourses'%}">add new</a>
+          <a href="{% url 'courseslist'%}" class="btn btn-info">View</a>
+
+
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Fund List</h5>
+          <p class="card-text">Click to add view detail</p>
+          <a  class="btn btn-success" href="{% url 'createuser'%}" class="btn btn-info">add new</a>
+<!--Modal create user-->
+          <a href="{% url 'adminuserlist'%}" class="btn btn-info">View</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+
+{% else %}
+
+
+<div class="row">
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Muqtadi List</h5>
+        <p class="card-text">click this to view details</p>
+        <h1>
+      {% if request.user.useradmin.educenter.id %}
+      
+      
+     
+
+           <a class="btn btn-success" href="{% url 'create_emp' request.user.useradmin.educenter.id %}">add new</a>
+         {% endif %}
+        <a href="{% url 'emplist'%}" class="btn btn-info">View</a>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Teacher List</h5>
+        <p class="card-text">Click to add view detail</p>
+        {% if request.user.useradmin.educenter.id %}
+           <a class="btn btn-success"  href="{% url 'createteacher' request.user.useradmin.educenter.id %}">add new</a>
+
+           {% endif %}
+<!--Modal create user-->
+        <a href="{% url 'teacherlist'%}" class="btn btn-info">View</a>
+
+      </div>
+    </div>
+  </div>
+</div>
+<hr>
+
+<div class="row">
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Imam List</h5>
+        <p class="card-text">click this to view details</p>
+
+        {% if request.user.useradmin.educenter.id %}
+
+
+           <a class="btn btn-success"  href="{% url 'createimam' request.user.useradmin.educenter.id %}">add new</a>
+           {% endif %}
+        
+        <a href="{% url 'imamlist'%}" class="btn btn-info">View</a>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Student List</h5>
+        <p class="card-text">Click to add view detail</p>
+        {% if request.user.useradmin.educenter.id %}
+           <a class="btn btn-success"  href="{% url 'createstu' request.user.useradmin.educenter.id %}">add new</a>
+           {% endif %}
+<!--Modal create user-->
+        <a href="{% url 'stulist'%}" class="btn btn-info">View</a>
+      </div>
+    </div>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Courses List</h5>
+        <p class="card-text">click this to view details</p>
+
+        {% if request.user.useradmin.educenter.id %}
+
+           <a class="btn btn-success"  href="{% url 'createCourses' request.user.useradmin.educenter.id %}">add new</a>
+           {% endif %} 
+
+        <a href="{% url 'courseslist'%}" class="btn btn-info">View</a>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Student List</h5>
+        <p class="card-text">Click to add view detail</p>
+       {% if request.user.useradmin.educenter.id %}
+           <a class="btn btn-success" href="{% url 'createstu' request.user.useradmin.educenter.id %}">add new</a>
+        {% endif %}
+<!--Modal create user-->
+        <a href="{% url 'stulist'%}" class="btn btn-info">View</a>
+      </div>
+    </div>
+  </div>
+</div>
+<hr>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+ {% block content %}
+
+ <section id="input-sizing">
+    <div class="row match-height">
+        <div class="col-md-6 col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Add New Imam</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                              {% if not request.user.is_superuser %}
+
+                            <form method='POST' novalidate>
+                               {% csrf_token %}
+                              {% if form.messages %}
+                                {% for m in form.messages %}
+                                <h1>{{m}}</h1>
+                                {% endfor %}
+                                {% endif %}
+
+                           {% if form.errors %}
+                           {% for error in form.errors  %}
+                               <h5>{{error}}</h5>
+
+                               {% endfor %}
+                           {% endif %}
+
+
+
+
+                           {{form.name.error}}
+                                   {{form.name.label_tag}}
+                                   {{form.name}}
+<br><br>
+                                <span style="display:none;">
+                                         {{form.educenter.errors}}
+                                       {{form.educenter.label_tag}}
+                                       {{form.educenter}}
+                                      </span>
+                                <input type="submit" value="Save" class="btn-primary btn"> </input>
+
+                            </form>
+   {% else %}
+
+                                <form method='POST' novalidate>
+                               {% csrf_token %}
+                              {% if form.messages %}
+                                {% for m in form.messages %}
+                                <h1>{{m}}</h1>
+                                {% endfor %}
+                                {% endif %}
+
+                           {% if form.errors %}
+                           {% for error in form.errors  %}
+                               <h5>{{error}}</h5>
+
+                               {% endfor %}
+                           {% endif %}
+
+
+
+                           {{form.name.error}}
+                                   {{form.name.label_tag}}
+                                   {{form.name}}
+
+<br><br>
+                                   <span>
+                                         {{form.educenter.errors}}
+                                       {{form.educenter.label_tag}}
+                                       {{form.educenter}}
+                                      </span>
+<br><br>
+
+                           <input type="submit" value="Save" class="btn-primary btn"> </input>
+
+                            </form>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+
+ </form>
+ {% endblock %}
+ 

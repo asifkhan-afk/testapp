@@ -1,0 +1,14 @@
+{% extends 'base.html'%}
+
+    {% block content %}
+<div>
+    <h2>Are you sure you want to logout!!</h2>
+
+       <a href="{%url 'login' %}" class="btn btn-info" role="button"  style="
+       background-color: rgb(7, 138, 255);
+       width:90px;
+       color:white;
+       ">Logout</a>
+
+</div>
+    {% endblock %}

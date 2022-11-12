@@ -1,0 +1,240 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+    input{
+        class:form-control;
+    }
+</style>
+
+
+<form method='POST' enctype=multipart/form-data>
+                        {% csrf_token %}
+                    {% for hf in form.hidden_fields %}
+                    
+                    {{hf.errors}}
+                    {{hf}}
+                    
+                    {% endfor %}
+                    {{form.management_form}}
+                    {{formset.none_form_errors}}
+                    {{form.none_form_errors}}
+                 
+                   
+            {% for f in form.forms %}
+            {{f.as_p}}
+            {% endfor %}
+                  
+        
+          
+            
+           
+                    <button type=submit class='btn btn-info'>Add</button>
+                    </form>
+                  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <h2>Masjid  : {{object.name|title}}<h2>
+
+    <div class="form-modal-ex">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-outline-primary waves-effect" data-toggle="modal" data-target="#inlineForm">
+            Add new
+        </button>
+        <!-- Modal -->
+        <div class="modal fade text-left" id="inlineForm" tabindex="-1" aria-labelledby="myModalLabel33" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel33">Addmin</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <form method='POST' enctype=multipart/form-data>
+                        {% csrf_token %}
+                    {% for hf in form.hidden_fields %}
+                    
+                    {{hf.errors}}
+                    {{hf}}
+                    
+                    {% endfor %}
+                    {{form.management_form}}
+                    {{form.none_form_errors}}
+                    
+                    {% for f in form.forms %}
+                    <h2>
+                    {% if f.instance.id %}
+                    Imam  : {{f.instance.name}}<br>
+                   Salary:  {{f.instance.salary}}
+                   {{f.name.label_tag}}
+                   {{f.name}}
+                    {{form}}
+                    {% endif %}
+                    </h2>
+                   
+            {% endfor %}
+          
+            
+           
+                    <button type=submit class='btn btn-info'>Save</button>
+                    </form>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+ 
+{% for f in form.forms %}
+        <h2>
+        {% if f.instance.id %}
+        Imam  : {{f.instance.name}}<br>
+       Salary:  {{f.instance.salary}}
+        
+        {% endif %}
+       
+                    <h2>
+                    {% if f.instance.id %}
+                   
+                    
+                   {{f.name.label_tag}}
+                   {{f.name}}
+                    {{form}}
+                    {% endif %}
+        </h2>
+{% endfor %} 
+ <div class="content-body">
+    
+    
+   <form method='post' enctype=multipart/form-data >
+    {% for f  in form.forms  %}
+    <section class="form-control-repeater">
+        <div class="row">
+            <!-- Invoice repeater -->
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Add imam</h4>
+                    </div>
+                    <div class="card-body">
+                        <form action="#" class="invoice-repeater">
+                            <div data-repeater-list="invoice">
+                                
+                            <div data-repeater-item="" style="">
+                                    <div class="row d-flex align-items-end">
+                                        <span >{{f.name.errors}}</span>
+                                        <div class="col-md-4 col-12">
+
+                                            <div class="form-group">
+                                                <label for="itemname">{{f.name.label_tag}}</label>
+                                                <span >{{f.name}}</span>
+                                            </div>
+                                        </div>
+                                        
+
+                                        <div class="col-md-2 col-12">
+                                            <div class="form-group">
+                                                <label for="itemname">{{f.phone.label_tag}}</label>
+                                                <span >{{f.phone}}</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-2 col-12">
+                                            <div class="form-group">
+                                                <label for="itemname">{{f.salary.label_tag}}</label>
+                                                <span >{{f.salary}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 col-12">
+                                            <div class="form-group">
+                                                <label for="itemname">{{f.address.label_tag|linebreaksbr}}</label>
+                                                <span >{{f.address|linebreaks}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class='row d-flex align-items-end'>
+                                        <div class="col-md-2 col-12">
+                                            <div class="form-group">
+                                                <label for="itemname">{{f.cnic.label_tag}}</label>
+                                                <span >{{f.cnic}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 col-12">
+                                            <div class="form-group">
+                                                <label for="itemname">{{f.qualification.label_tag}}</label>
+                                                <span >{{f.qualification}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 col-12">
+                                            <div class="form-group">
+                                                <label for="itemname">{{f.edu_center.label_tag}}</label>
+                                                <span >{{f.edu_center}}</span>
+                                            </div>
+                                            
+                                        </div>
+
+                                        <div class="col-md-2 col-12">
+                                            <div class="form-group">
+                                                <label for="staticprice">Price</label>
+                                                <input type="text" readonly="" class="form-control-plaintext" id="staticprice" value="$32">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-2 col-12 mb-50">
+                                            <div class="form-group">
+                                                <button class="btn btn-outline-danger text-nowrap px-1 waves-effect" data-repeater-delete="" type="button">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x mr-25"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                                    <span>Delete</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                </div></div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <button class="btn btn-icon btn-primary waves-effect waves-float waves-light" type="button" data-repeater-create="">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus mr-25"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                                        <span>Add New</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- /Invoice repeater -->
+        </div>
+    </section>
+    {% endfor %}
+    <button type='submit' class='btn btn-primary'>Save</button>
+</form>
+</div>
+
+
+{% endblock content %} 

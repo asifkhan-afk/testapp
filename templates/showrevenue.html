@@ -1,0 +1,225 @@
+{% extends 'base.html' %}{% load subfilter %} {% load static %}
+{% block title %}
+Monthly Revenue
+{% endblock %}
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+<!--<link rel="stylesheet"  href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css"  >-->
+<link rel="stylesheet"  href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css" >
+<style>
+    .dataTables_filter > label > input{
+    background:light;
+    auto-focus:true;
+    border-radius:6px;
+    }
+    .dt-buttons > Button{
+    background:light;
+    margin-top:5px;
+    margin-bottom:0px;
+    padding-top:3px;
+    border-radius:6px;
+    }
+    .h{
+    color:blue;
+    }
+</style>
+
+<style>
+.btnclass {
+	background-color: lightblue;
+	border-radius: 6px;
+	width: 64px;
+	align: left;
+	height: 34px;
+}
+
+.btnclassdanger {
+	background-color: lightcoral;
+	border-radius: 6px;
+	width: 64px;
+	align: left;
+	height: 34px;
+}
+</style>
+<script src="https://unpkg.com/htmx.org@1.8.0"></script>
+<div class="mmain">
+		{% if request.user.is_superuser %}
+	<div class="row ml-1">
+		<div class="col-lg-6 col-md-12 h-25 text-info page-link rounded">
+			<label for="idmonth">Month:</label>
+			<select class="round" name="month" id="idmonth">
+
+				<option value="1">Jan</option>
+				<option value="2">Feb</option>
+				<option value="3">March</option>
+				<option value="4">April</option>
+				<option value="5">May</option>
+				<option value="6">June</option>
+				<option value="7">July</option>
+				<option value="8">August</option>
+				<option value="9">September</option>
+				<option value="10">October</option>
+				<option value="11">November</option>
+				<option value="12">december</option>
+			</select>
+			<label for="idyear">Year : </label>
+			<select class="round" name="Year" id="idyear">
+				<option value="2022">2020</option>
+				<option value="2021">2021</option>
+				<option value="2022">2022</option>
+				<option value="2023">2023</option>
+				<option value="2024">2024</option>
+				<option value="2025">2025</option>
+				<option value="2026">2026</option>
+				<option value="2027">2027</option>
+				<option value="2028">2028</option>
+				<option value="2029">2029</option>
+				<option value="2010">2030</option>
+				<option value="2031">2031</option>
+			</select>
+
+			<button  class="btnjan  float-right btn btn-primary " onclick="recored(3)">show</button>
+
+		</div>
+		{% if request.user.is_superuser %}
+
+		<div class="card-head col-md-6 float-right page-link text-info" >
+			<a class="btn btn-primary float-right ml-4" href="{% url 'totalrevenue' %}">Total</a>
+		</div>
+		{% else %}
+		<div class="card-head col-md-6 float-right page-link text-info" >
+			<h1 class=" float-right ml-4" href="{% url 'totalrevenue' %}">Total : {{totalrev.balance}}</h1>
+		</div>
+		{% endif %}
+	</div>
+	{% else %}
+	<div class="card-head col-md-12 rounded float-right page-link text-info" >
+			<h1 class=" float-right ml-4" href="{% url 'totalrevenue' %}"><span class="text-primary">TOTAL : {{totalrev.balance}}</span></h1>
+		</div>
+	{% endif %}
+
+	<br>
+	{% if request.user.is_superuser %}
+
+	<div style="border-radius:9px;" class="bg-white table-responsive">
+		<table class="table table-hover example ">
+			<thead>
+				<tr >
+					<th class="text-primary" >Educenter</th>
+					<th class="text-primary">balance</th>
+					<th class="text-primary">Month</th>
+					<th class="text-primary">Year</th>
+
+				</tr>
+			</thead>
+			<tbody>
+			{% for i in mr %}
+			<tr>
+				<td>{{i.educenter}}</td>
+				<td>{{i.balance}}</td>
+				<td>{{i.month}}</td>
+				<td>{{i.year}}</td>
+			</tr>
+			{% endfor %}
+			{{total}}
+			</tbody>
+			</table>
+		</div>
+	</div>
+	{% else %}
+		<div style="border-radius:9px;" class="bg-white table-responsive">
+		<table class="table table-hover example ">
+			<thead>
+				<tr >
+					<th class="text-primary" >Educenter</th>
+					<th class="text-primary">balance</th>
+					<th class="text-primary">Month</th>
+					<th class="text-primary">Year</th>
+
+				</tr>
+			</thead>
+			<tbody>
+			{% for i in mr %}
+			<tr>
+				<td>{{i.educenter}}</td>
+				<td>{{i.balance}}</td>
+				<td>{{i.month}}</td>
+				<td>{{i.year}}</td>
+			</tr>
+			{% endfor %}
+			</tbody>
+			</table>
+		</div>
+	</div>
+
+	{% endif %}
+
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="{% static '/js/jquery.js' %}"></script>
+
+<script>
+
+
+
+
+
+
+		function recored(){
+
+			m = document.getElementById("idmonth").value;
+			y = document.getElementById("idyear").value;
+			var month = m;
+			var year = y;
+
+			var url="/showrevenue/" + month + "/" + year;
+			window.location.href = url;
+
+
+
+
+
+			};
+
+</script>
+
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+<script>
+
+   $(document).ready(function() {
+   $.noConflict(true);
+
+    $('.example').DataTable( {
+
+        dom: 'Bfrtip',
+        buttons: [
+            'copyHtml5',
+            'excelHtml5',
+            'csvHtml5',
+            'pdfHtml5'
+        ]
+    } );
+} );
+
+</script>
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">
+          Name: {{ educen.name }}
+        </h5>
+        <h4>Masjid:  {{educen.educenter.name}}</h4>
+        <p class="card-text"> salary:  {{educen.salary}}</p>
+        <p class="card-text"> Admin : {{educen.educenter.useradmin}}</p>
+        
+        <p class="card-text"> Address:  {{educen.address}}</p>
+        <p class="card-text"> CNIC:  {{educen.cnic}}</p>
+        {% if educen.qualification is not  None %}
+        <p class="card-text"> Qualification:  {{educen.qualification}}</p>
+        {% endif %}
+          {% if educen.is_teacher %}
+
+          <p class="card-text"> Courses:  {{educen.courses}}</p>
+
+          {% endif %}
+        <p class="card-text"> Is_teacher:  {{educen.is_teacher}}</p>
+
+      <a  class="btn btn-info" href="{% url 'create_emp' educen.educenter.id %}" type="submit">Add Muqtadi</a>
+
+      <a  class="btn btn-danger" href="{% url 'deleteimam' educen.id %}" type="submit">Delete</a>
+      <a  class="btn btn-primary" href="{% url 'updateimam' educen.id %}" type="submit">Update</a>
+  
+      
+      
+      <div id='show'></div>
+      
+      </div>
+    </div>
+  </div>
+{% endblock content %}

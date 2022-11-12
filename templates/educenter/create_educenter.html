@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+ {% block content %}
+ <div class=" row">
+    <div style="background-color: #eee; border-radius:10px;" class="offset-xm-0 offset-4 offset-md-4  w-xs-25 w-md-25 w-sm-25 w-lg-25 w-xl-25 p-3">
+ <h3>Create Mosque</h3>
+
+ <form method='POST' novalidate>
+    {% csrf_token %}
+{% if form.errors %}
+{% for error in errors  %}
+    <h5>{{error}}</h5>
+    {% endfor %}
+{% endif %}
+{{ form.useradmin.errors }}
+     {{ form.name.label_tag }}
+        {{ form.name.errors }}
+        {{ form.name }}
+   <br><br>
+      {{ form.address.label_tag }}
+        {{ form.address.errors }}
+        {{ form.address }}
+
+        <br>
+        <br><br>
+<input style="margin-left:135px;" type="submit">save</input>
+ </form>
+</div>
+</div>
+ {% endblock %}
+ 

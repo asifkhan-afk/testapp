@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+ {% block content %}
+ 
+ 
+
+
+
+
+    <div class="card-header row bg-white" ><a class="btn btn-info float-right" href="{% url 'createuser'%}">+ new</a></div><br>
+ <div class="row">
+     {% for educen in educenlist %}
+    <div class="col-sm-6">
+      <div class="card ">
+
+        <div class="card-body">
+          <h5 class="card-title">{{ forloop.counter}}
+            . Name: {{ educen.name }}
+          </h5>
+          <hr>  
+          <p>
+              Imam :
+          {% for entry in educen.teacher_set.all %}
+             {{entry.name}} ,
+              {% empty %}
+
+         <a href="{% url 'admcreateimam' %}"> <p>No imam added yet</p></a>
+          {% endfor %}</p>
+          
+          <p class="card-text"> Address:  {{educen.address}}</p>
+
+
+          <a href="{% url 'educendetail' educen.id %}" class="btn btn-primary ">View</a>
+
+        
+      </div>
+    </div>
+
+    </div>
+
+ {% empty %}
+<div class=" w-25 ml-125 center text-center"> <a href="{% url 'createuser' %}">No data to show</a></div>
+     <hr>
+ {% endfor%}
+     <hr>
+  </div>
+
+
+ {% endblock %}

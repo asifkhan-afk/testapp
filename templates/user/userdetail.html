@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">
+          Name: {{ object.username }}
+        </h5><br>
+               <h4>    
+
+
+     <a href="{% url 'emplist' %} ">{{object.masjid.muqtadi_set.count}}</a>
+
+        </h4>
+        
+      
+       
+      <a  class="btn btn-info" href="{% url 'adminedu' object.id %}" type="submit">Masjid</a>
+     
+  
+      
+      
+      <div id='show'></div>
+      
+      </div>
+    </div>
+  </div>
+{% endblock content %}

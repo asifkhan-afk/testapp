@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="col-sm-6">
+    <div class="card">
+        <div class="card-header "> <h1 class="text-primary">{{ studoner.name }}</h1> <h2 class="float-right"> {{studoner.educen.name}}</h2></div><hr>
+      <div class="card-body ml-2 ">
+          <div class="row">
+          <div class="col-lg-6 col-md-6">
+
+        <h4 class="card-text"> Paid Amount:  {{studoner.amount}}</h4>
+
+        <p class="card-text"> Paid Status:  {{studoner.paid}}</p>
+
+        <p class="card-text"> Paid Date:  {{studoner.paiddate}}</p>
+          <p class="card-text"> Paid Month:  {{studoner.paidmonth}}</p>
+          <p class="card-text"> Paid Year:  {{studoner.paidyear}}</p>
+          </div>
+
+<div class="col-lg-6 col-md-6">
+          <p class="card-text"> Month:  {{studoner.month}}</p>
+          <p class="card-text"> Year:  {{studoner.year}}</p></div>
+      </div>
+          <a  class="btn btn-success float-right " href="{% url 'studonerupdate' studoner.id %}" type="submit">Edit</a>
+
+      <a  class="btn btn-info float-right mr-1" href="{% url 'studonerlist' studoner.month studoner.year %}" type="submit">Back</a>
+
+
+
+
+
+
+      </div>
+    </div>
+  </div>
+{% endblock content %}

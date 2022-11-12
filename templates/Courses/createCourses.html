@@ -1,0 +1,77 @@
+{% extends 'base.html' %} 
+ {% block content %}
+ <style>
+    .errorlist{
+        color:red;
+    }
+ </style>
+ <section id="input-sizing">
+    <div class="row match-height">
+        <div class="col-md-6 col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Add New Course</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            
+                            <form method='POST' novalidate>
+                               {% csrf_token %}
+                              
+                              
+                           {% if form.errors %}
+                           {% for error in form.errors  %}
+                               <h5>{{error}}</h5>
+                              
+                               {% endfor %}
+                           {% endif %}
+                           
+                           
+                            
+                           
+                                   
+                                   {{form.name.label_tag}}
+                                   {{form.name}}
+                                  <h1> {{form.name.error}}</h1>
+                                   <br><br>
+                                 
+                                 {% if request.user.is_superuser%}
+
+                                  <span>
+
+                                           {{form.edu_center.label_tag}}
+                                           {{form.educenter}}
+                                           {{form.educenter.errors}}
+                                       </span>
+                                           <br><br>
+
+                                {% else %}
+                                       <span style='display:none;'>
+                                          
+                                           {{form.educenter.label_tag}}
+                                           {{form.educenter}}
+                                           {{form.educenter.errors}}
+                                       </span>
+                                           <br><br>
+                                    {% endif %}
+                               
+                             
+                                   
+                           <input type="submit"></input>
+                           
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</section>
+  
+
+
+ </form>
+ {% endblock %}
+ 

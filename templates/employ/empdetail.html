@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">
+          Name: {{ educen.name }}
+        </h5>
+        <a href="{% url 'emplist' %} ">{{educen.muqtadi_set.count}}</a>
+
+       
+        <p class="card-text">Fee : {{educen.fee }}</p>
+        <p class="card-text"> Address:  {{educen.address}}</p>
+        <p class="card-text"> CNIC:  {{educen.cnic}}</p>
+        <p class="card-text"> Address:  {{educen.address}}</p>
+        <p class="card-text">Masjid : {{educen.educenter.name}}</p>
+        <p class="card-text">Admission date : {{educen.admission_date}}</p>
+        <p class="card-text"> Admission month:  {{educen.adm_month}}</p>
+        <p class="card-text"> Admission year:  {{educen.adm_year}}</p>
+        <a href="{% url 'empdelete' educen.id %}" class="btn btn-danger">delete</a>
+        <a href="{% url 'empupdate' educen.id %}" class="btn btn-primary">update</a>
+        
+      
+      </div>
+    </div>
+  </div>
+{% endblock content %}

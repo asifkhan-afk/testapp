@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+{% load static %}
+ {% block content %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.css">
+<script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.js"></script>
+ <section id="input-sizing">
+    <div class="row match-height">
+        <div class="col-md-6 col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Add New Imam</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            
+                            <form method='POST' novalidate>
+                               {% csrf_token %}
+                              {% if form.messages %}
+                                {% for m in form.messages %}
+                                <h1>{{m}}</h1>
+                                {% endfor %}
+                                {% endif %}
+                              
+                           {% if form.errors %}
+                           {% for error in form.errors  %}
+                               <h5>{{error}}</h5>
+                              
+                               {% endfor %}
+                           {% endif %}
+                           
+
+                          
+                           
+                           {{form.name.error}}
+                                   {{form.name.label_tag}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                   {{form.name}}
+
+                                   <br><br>
+                                   {{form.address.errors}}
+                                   {{form.address.label_tag}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                   {{form.address}}
+                                 
+                                   <br><br>
+                                   <span>{{form.phone.help_text}}
+                                                      <br>
+                                    {{form.phone.errors}}
+                                    {{form.phone.label_tag}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                    {{form.phone}}</span>
+
+                                   <br><br>
+                                   {{form.salary.errors}}
+                                   {{form.salary.label_tag}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                   {{form.salary}}
+                                 
+                                   <br><br>
+                                   {{form.cnic.errors}}
+                                   {{form.cnic.label_tag}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                   {{form.cnic}}
+                                   
+                                   <br><br>
+                                   <span >
+                                    {{form.is_teacher.errors}}
+                                       {{form.is_teacher.label_tag}}
+                                       {{form.is_teacher}}
+                                      </span>
+                                <br>
+
+                                <span class="forteacher" style="display:none;">
+                                    {{form.qualification.errors}}
+                                    {{form.qualification.label_tag}}
+                                    {{form.qualification}}<br><br>
+
+                                         {{form.courses.errors}}
+                                           {{form.courses.label_tag}}
+                                        <span class="page-link">
+                                            {{form.courses}}
+                                          <a href="{% url 'admcreatecourses' %}">Add New </a>
+                                        </span>
+                                </span>
+                                <br>
+
+
+
+                                    {% if request.user.is_superuser %}
+                                <span >
+                                     {{form.educenter.errors}}
+                                       {{form.educenter.label_tag}}
+                                       {{form.educenter}}
+                                      </span>
+
+                                {% else %}
+
+                                   <span style="display:none;">
+                                     {{form.educenter.errors}}
+                                       {{form.educenter.label_tag}}
+                                       {{form.educenter}}
+                                      </span>
+                                {% endif %}
+                                       <br><br>
+                                       <span style="display:none;" >
+                                        {{form.is_imam.errors}} 
+                                           {{form.is_imam.label_tag}}
+                                           {{form.is_imam}}
+                                          
+                                       </span>
+
+                               
+                             
+                                   
+                           <input type="submit"></input>
+                           
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+     </section>
+ </form>
+<script src="{% static '/js/jquery.js' %}"></script>
+<script>
+
+$(document).ready(function(){
+  $("#id_is_teacher").change(function(){
+   if ($(this).is(':checked')) {
+          $('.forteacher').css('display','unset');
+    } else {
+         $('.forteacher').css('display','none');
+    }
+  });
+});
+</script>
+<script>
+  $(document).ready(function() {
+    var coursesdropdown = new Choices('#id_courses', {
+      removeItemButton: true,
+      searchResultLimit: 5,
+      placeholder: "Select Courses",
+      renderChoiceLimit: 5
+    });
+    var coursesdropdown = new Choices('#id_educenter', {
+    placeholder: "Select Educenter",
+      removeItemButton: true,
+      searchResultLimit: 5,
+      renderChoiceLimit: 5
+    });
+  });
+</script>
+ {% endblock %}
+ 

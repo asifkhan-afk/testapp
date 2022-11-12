@@ -1,0 +1,64 @@
+{% load static %}
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+  <title>Login</title>
+  <link rel="apple-touch-icon" href="{% static '/app-assets/images/ico/apple-icon-120.png '%}">
+  <link rel="shortcut icon" type="image/x-icon" href="{% static '/app-assets/images/ico/favicon.ico' %}">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600" rel="stylesheet">
+{% comment %} page {% endcomment %}
+<style>
+.divup{
+  border:1px solid lightblue;
+  border-radius:10px;
+  width:60px;
+  height:370px;
+  
+  box-shadow:10px 10px 20px white;
+}
+#login{
+align-text:center;
+
+}
+ul{
+ color:red;
+  list-style-type: none;
+}
+.ton{
+ 
+  margin-top:50px;
+}
+</style>
+
+</head>
+<body style="background-color:#dde0d7;">
+  <br>
+  <br>
+  <br>
+
+<div >
+  <div class="row border-2">
+
+    <div style="background-color:lightblue;"  class="col-4 divup offset-4 ">
+      <form method='post' novalidate>
+       {% csrf_token %}
+       <h1 id="login" class="text-info font-weight-bold"> Login</h1>
+     <div>
+      {{ form.non_field_errors }}
+     </div>
+      
+      {% for f in form %}
+      {{f.label_tag}}<br>
+      {{f}}<br>
+        {{f.errors}}
+      {% endfor %}
+    
+       <br>
+       <button class="btn btn-info ton" type="submit">Login</button>
+      </form>
+    </div>
+</div>
+</div>
+</body>

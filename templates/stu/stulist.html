@@ -1,0 +1,193 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block title %}
+Student's List
+{% endblock %}
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+<!--<link rel="stylesheet"  href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css"  >-->
+<link rel="stylesheet"  href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css" >
+<style>
+    .dataTables_filter > label > input{
+    background:light;
+    auto-focus:true;
+    border-radius:6px;
+    }
+    .dt-buttons > Button{
+    background:light;
+    margin-top:5px;
+    margin-bottom:0px;
+    padding-top:3px;
+    border-radius:6px;
+    }
+    .h{
+    color:blue;
+    }
+</style>
+
+
+{% if request.user.is_superuser %}
+<div style="border-radius:9px;"  class="bg-white table-responsive">
+    <div class="card-header "><a href="{% url 'admcreatestu' %}" class="btn btn-info ">+ new</a>    </div>
+                                <table class="table table-hover example">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-primary">Name</th>
+                                            <th class="text-primary">fee</th>
+                                            <th class="text-primary">phone</th>
+                                            <th class="text-primary">educenter</th>
+                                            <th class="text-primary">Address</th>
+                                            <th class="text-primary">detail</th>
+                                        </tr>
+                                    </thead>
+
+
+                                    <tbody id="sidenav-3">
+                                      {% for student in studentlist %}
+                                        <tr>
+                                            <td>
+                            <span class="badge badge-pill badge-light-primary"> {{forloop.counter}} </span><b></b><b></b>
+                                                <span class="font-weight-bold name ">{{student.name|title}}</span>
+                                            </td>
+                                            <td>{{student.fee}}</td>
+                                            <td>
+                                                <div class="avatar-group">
+
+                                                       <span>{{student.phone}}</span>
+
+                                                </div>
+                                            </td>
+                                            <td><span class=" badge-light-primary mr-1">{{student.educenter}}</span></td>
+
+                                            <td>
+                                                <span class=" badge-light-primary mr-1">student address</span></td>
+                                            <td>
+                                                <div class="dropdown">
+
+                                                    <button type="button" class="btn btn-sm dropdown-toggle hide-arrow waves-effect waves-float waves-light" data-toggle="dropdown">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
+                                                    </button>
+                                                    <div class="dropdown-menu">
+                                                        <a class="dropdown-item" href="{% url 'studentdetail' student.id%}">
+                                                             <i data-feather="info"></i>
+                                                            <span>Detail</span>
+                                                        </a>
+
+                                                        <a class="dropdown-item" href="{% url 'updatestu' student.id%}">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2 mr-50"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
+                                                            <span>Edit</span>
+                                                        </a>
+                                                        <a class="dropdown-item" href="{% url 'deletestu' student.id%}">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash mr-50"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                                                            <span>Delete</span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                                    {% endfor %}
+                                      </tbody>
+
+
+
+                                    {% else %}
+                                    <!-- for non super user -->
+
+
+<div style="border-radius:9px;" class="bg-white table-responsive">
+    {% if request.user.useradmin.educenter.id %}
+    <div class="card-header "><a href="{% url 'createstu' request.user.useradmin.educenter.pk %}" class="btn btn-info ">+ new</a> </div>
+    {% endif %}
+                                <table class="table table-hover example">
+                                    <thead>
+
+                                        <tr>
+                                            <th class="text-primary">Name</th>
+                                            <th class="text-primary">fee</th>
+                                            <th class="text-primary">phone</th>
+                                            <th class="text-primary">address</th>
+                                            <th class="text-primary">detail</th>
+                                        </tr>
+                                    </thead>
+
+ <tbody>
+    {% for student in studentlist %}
+                                        <tr>
+                                            <td>
+                             {{forloop.counter}} <b>.</b>
+                                                <span class="font-weight-bold">{{student.name}}</span>
+                                            </td>
+                                            <td>{{student.fee}}</td>
+                                            <td>
+                                                <div class="avatar-group">
+
+                                                       <span>{{student.phone}}</span>
+
+                                                </div>
+                                            </td>
+                                            <td><span class=" badge-light-primary mr-1">student address</span></td>
+                                            <td>
+                                                <div class="dropdown">
+                                                    <button type="button" class="btn btn-sm dropdown-toggle hide-arrow waves-effect waves-float waves-light" data-toggle="dropdown">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
+                                                    </button>
+                                                    <div class="dropdown-menu">
+                                                        <a class="dropdown-item" href="{% url 'studentdetail' student.id%}">
+                                                             <i data-feather="info"></i>
+                                                             <span>Detail</span>
+                                                        </a>
+                                                        <a class="dropdown-item" href="{% url 'updatestu' student.id%}">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2 mr-50"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
+                                                            <span>Edit</span>
+                                                        </a>
+                                                        <a class="dropdown-item" href="{% url 'deletestu' student.id%}">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash mr-50"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                                                            <span>Delete</span>
+                                                        </a>
+
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+ {% endfor %}
+                                    </tbody>
+
+                                    {% endif %}
+                                </table>
+                            </div>
+</table></div>
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+<script>
+
+   $(document).ready(function() {
+   $.noConflict(true);
+
+    $('.example').DataTable( {
+
+        dom: 'Bfrtip',
+        buttons: [
+            'copyHtml5',
+            'excelHtml5',
+            'csvHtml5',
+            'pdfHtml5'
+        ]
+    } );
+} );
+
+</script>
+
+
+ {% endblock %}

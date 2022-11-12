@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-title mt-1 ml-1">
+                <h2>Admin  : {{object.username|title}}<h2>
+                    <br>
+                <h2>Create Masjid<h2>
+            </div>
+            <div class="card-body">
+
+
+                    <form method='POST' enctype=multipart/form-data>
+                        {% csrf_token %}
+                    {% for hf in form.hidden_fields %}
+                    {{hf.errors}}
+                    {{hf}}
+                    {% endfor %}
+                    {{form.management_form}}
+                    {{form.none_form_errors}}
+                    {% for f in form.forms %}
+                            <h2>
+                            {% if f.instance.id %}
+                            Masjid  : {{f.instance.username}}
+                            {{f.instance.name}}
+                                  {% endif %}
+                            </h2>
+
+                    {% endfor %}
+                        <div class="card border-0">
+                            {% for f in form %}
+                             {{f.errors}}
+                         {{f.label_tag}}<br>
+
+                         {{f}}
+                            <br><br>
+                              {% endfor %}
+                        </div>
+
+                    <button type=submit class='btn btn-info'>Save</button>
+                    </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}

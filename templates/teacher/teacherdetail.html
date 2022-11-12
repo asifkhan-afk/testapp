@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">
+          Name: {{ educen.name }}
+
+
+        </h5>
+        {% if request.user.is_superuser %}
+        <h4> Admin : {{educen.educenter.useradmin}}</h4>
+        <p class="card-text"> Masjid:  {{educen.educenter.name}}</p>
+        {% endif %}
+        <p class="card-text"> Address:  {{educen.address}}</p>
+        <p class="card-text"> salary:  {{educen.salary}}</p>
+
+        <p class="card-text"> Address:  {{educen.address}}</p>
+        <p class="card-text"> CNIC:  {{educen.cnic}}</p>
+
+        <p class="card-text"> Qualification:  {{educen.qualification}}</p>
+
+
+          <p class="card-text"> Courses:   {% for i in courses %} "{{i.name}}", {% endfor %}</p>
+         <p class="card-text">Admission date : {{educen.admission_date}}</p>
+        <p class="card-text"> Admission month:  {{educen.adm_month}}</p>
+        <p class="card-text"> Admission year:  {{educen.adm_year}}</p>
+
+
+        <p class="card-text"> Is_Imam:  {{educen.is_imam}}</p>
+
+       {% if request.user.useradmin.educenter.id %}
+      <a  class="btn btn-info" href="{% url 'createstu' request.user.useradmin.educenter.id %}" type="submit">Add Student</a>
+        {% endif %}
+      <a  class="btn btn-danger" href="{% url 'deleteteacher' educen.id %}" type="submit">Del</a>
+      <a  class="btn btn-danger" href="{% url 'updateteacher' educen.id %}" type="submit">Update</a>
+  
+      
+      
+      <div id='show'></div>
+      
+      </div>
+    </div>
+  </div>
+{% endblock content %}

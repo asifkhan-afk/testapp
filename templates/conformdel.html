@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+ {% block content %}
+<div class="text-center">
+    <div class="card col-md-6 p-5">
+         <h3>Delete?</h3>
+        <br>
+             <form method='POST' novalidate>
+                {% csrf_token %}
+
+
+            {{form.as_p}}
+            Your data will be no longer exist
+
+
+
+                <br>
+                <br><br>
+
+
+            <button class='btn btn-danger' type="submit"> Delete</button>
+
+             </form>
+    </div>
+</div>
+ {% endblock %}
+ 

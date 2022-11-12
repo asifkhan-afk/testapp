@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+ {% block content %}
+
+ <section id="input-sizing">
+    <div class="row match-height">
+        <div class="col-md-6 col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Add New Muqtadi</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+
+                            <form method='POST' novalidate>
+    {% csrf_token %}
+
+
+{% if form.errors %}
+{% for error in errors  %}
+    <h5>{{error}}</h5>
+
+    {% endfor %}
+{% endif %}
+
+        {{form.name.errors}}
+        {{form.name.label_tag}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        {{form.name}}
+        <br><br>
+        {{form.address.errors}}
+        {{form.address.label_tag}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        {{form.address}}
+        <br><br>
+        <span>{{form.phone.help_text}}
+                                                  <br><br>
+        {{form.phone.errors}}
+        {{form.phone.label_tag}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+        {{form.phone}}</span>
+
+        <br><br>
+        {{form.fee.errors}}
+        {{form.fee.label_tag}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        {{form.fee}}
+        <br><br>
+        {{form.cnic.errors}}
+        {{form.cnic.label_tag}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        {{form.cnic}}
+        <br><br>
+                                {{form.admission_date.errors}}
+        adm date &nbsp;&nbsp;&nbsp;
+        {{form.admission_date}}
+        <br><br>
+                                {{form.adm_month.errors}}
+        {{form.adm_month.label_tag}}&nbsp;&nbsp;&nbsp;
+        {{form.adm_month}}
+        <br><br>
+                                {{form.adm_year.errors}}
+        {{form.adm_year.label_tag}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        {{form.adm_year}}
+        <br><br>
+
+                             {% if request.user.is_superuser %}
+
+                                    <span >
+                                    {{form.educenter.errors}}
+                                    {{form.educenter.label_tag}}
+                                    {{form.educenter}}</span>
+                                    <br><br>
+                                {% else %}
+                                  <span style="display:none;">
+                                {{form.educenter.errors}}
+                                {{form.educenter.label_tag}}
+                                {{form.educenter}}</span>
+                                <br><br>
+                                {% endif %}
+
+
+        <button class="btn btn-info ton" type="submit">Save</button>
+
+ </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+ </section>
+ {% endblock %}

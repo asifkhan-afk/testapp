@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="col-sm-6">
+    <div class="card">
+        <div class="card-header "> <h1 class="text-primary">{{ teachdoner.name }}</h1> <h2 class="float-right"> {{teachdoner.educen.name}}</h2></div><hr>
+      <div class="card-body ml-2 ">
+          <div class="row">
+          <div class="col-lg-6 col-md-6">
+
+        <h4 class="card-text"> Received Amount:  {{teachdoner.amount}}</h4>
+
+        <p class="card-text"> Received Status:  {{teachdoner.paid}}</p>
+
+        <p class="card-text"> Received Date:  {{teachdoner.paiddate}}</p>
+          <p class="card-text"> Received Month:  {{teachdoner.paidmonth}}</p>
+          <p class="card-text"> Received Year:  {{teachdoner.paidyear}}</p>
+          </div>
+
+<div class="col-lg-6 col-md-6">
+          <p class="card-text"> Month:  {{teachdoner.month}}</p>
+          <p class="card-text"> Year:  {{teachdoner.year}}</p></div>
+      </div>
+          <a  class="btn btn-success float-right " href="{% url 'teachdonerupdate' teachdoner.id %}" type="submit">Edit</a>
+
+      <a  class="btn btn-info float-right mr-1" href="{% url 'teachdonerlist' teachdoner.month teachdoner.year %}" type="submit">Back</a>
+
+
+
+
+
+
+      </div>
+    </div>
+  </div>
+{% endblock content %}
